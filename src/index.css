@@ -16,20 +16,20 @@ html, body, #root {
   background-color: transparent;
 }
 
-table td, table th {
+.labInfo table td, .labInfo table th {
   border: none;
 }
 
-table th, table td {
-  border-bottom: 1px solid black;
+.labInfo table th, .labInfo table td {
+  border-bottom: 1px solid #777777;
 }
 
-.table thead th {
+.labInfo .table thead th {
   vertical-align: bottom;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #777777;
 }
 
-.table th {
+.labInfo .table th {
   padding: .75rem;
   vertical-align: top;
   border-top: none;
@@ -48,6 +48,6 @@ table th, table td {
   margin-bottom: 15px;
 }
 
-.table thead th:first-child {
+.labInfo .table thead th:first-child {
   padding-left: 5px;
 }
