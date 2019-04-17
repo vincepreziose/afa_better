@@ -6,26 +6,30 @@ class Navbar extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return (
-        <div>
-          <Link to="/signout">Signout</Link>
-          <Link to="/admin">Admin</Link>
-        </div>
+        <ul className="navbar-nav px-3">
+          <li className="nav-item text-nowrap">
+            <Link className="nav-link" to="/signout">Sign out</Link>
+          </li>
+        </ul>
       );
     } else {
       return (
-        <div>
-          <Link to="/signin">Signin</Link>
-        </div>
+        <ul className="navbar-nav px-3">
+          <li className="nav-item text-nowrap">
+            <Link className="nav-link" to="/signin">Sign in</Link>
+          </li>
+        </ul>
       );
     }
   }
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <Link to="/" className="navbar-brand">Animal Freedom Act!</Link>
-        {this.renderLinks()}
-      </nav>
+      <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <Link to="/" className="navbar-brand col-sm-3 col-md-2 mr-0">Animal Freedom Act!</Link>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"></input>
+      {this.renderLinks()}
+    </nav>
     );
   }
 }
