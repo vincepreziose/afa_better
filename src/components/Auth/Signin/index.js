@@ -3,6 +3,8 @@ import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
+import './Signin.module.css';
+import joeCool from '../../../assets/img/joe-cool.jpg';
 
 class Signin extends Component {
   onSubmit = (formProps) => {
@@ -15,28 +17,37 @@ class Signin extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
-        <fieldset>
-          <label htmlFor="email">Email</label>
-          <Field
-            name="email"
-            type="text"
-            component="input"
-            autoComplete="none"
-          />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="password">Password</label>
-          <Field
-            name="password"
-            type="password"
-            component="input"
-            autoComplete="none"
-          />
-        </fieldset>
-        <div>{this.props.errorMessage}</div>
-        <button>Sign In!</button>
-      </form>
+      <div className="container" style={{ marginTop: '200px'}}>
+        <div className="row">
+          <div className="col-md-4 offset-md-4" style={{ textAlign: 'center'}}>
+            <img src={joeCool} style={{ marginBottom: '20px'}} />>
+            <form onSubmit={handleSubmit(this.onSubmit)}>
+              <div className="form-group">
+                <Field
+                  name="email"
+                  type="email"
+                  component="input"
+                  autoComplete="none"
+                  placeholder="Enter email"
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <Field
+                  name="password"
+                  type="password"
+                  component="input"
+                  autoComplete="none"
+                  placeholder="Enter password"
+                  className="form-control"
+                />
+              </div>
+              <div>{this.props.errorMessage}</div>
+              <button type="submit" class="btn btn-block btn-outline-primary">Sign in</button>
+            </form>
+          </div>
+        </div>
+      </div>
     )
   }
 }
