@@ -28,10 +28,79 @@ class LabMap extends Component {
     })
   }
 
+  renderMapMarkers() {
+    this.props.labs.forEach(lab => {
+      const coordinates = {
+        lat: lab.mapMarker.lat.$numberDecimal,
+        lng: lab.mapMarker.long.$numberDecimal
+      }
+
+      let reportData = `<div class="row">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="firstColumn" scope="col">A</th>
+                  <th scope="col">B</th>
+                  <th scope="col">C</th>
+                  <th scope="col">D</th>
+                  <th scope="col">E</th>
+                  <th scope="col">Notes</th>
+                </tr>
+              </thead>
+              <tbody>`;
+
+      lab.reportData.data.forEach(data => {
+        data.a = typeof data.a == 'undefined' ? '' : data.a;
+        data.b = typeof data.b == 'undefined' ? '' : data.b;
+        data.c = typeof data.c == 'undefined' ? '' : data.c;
+        data.d = typeof data.d == 'undefined' ? '' : data.d;
+        data.e = typeof data.e == 'undefined' ? '' : data.e;
+        data.notes = typeof data.notes == 'undefined' ? '' : data.notes;
+
+        reportData += `<tr>
+                  <td class="firstColumn">${data.a}</td>
+                  <td>${data.b}</td>
+                  <td>${data.c}</td>
+                  <td>${data.d}</td>
+                  <td>${data.e}</td>
+                  <td>${data.notes}</td>
+                </tr>`;
+      });
+
+      reportData += `</tbody>
+                </table>
+              </div>
+            </div>`;
+
+      const marker = L.marker([coordinates.lat, coordinates.lng]).addTo(this.map);
+
+      let labInfoTable = `<div class="container labInfo">
+            <div class="labHeaderInfo">
+                <div class="labName">${lab.name}</div>
+                <div class="labAddress">${lab.address1}</div>`;
+
+      if (lab.address2 !== "") {
+        labInfoTable += `<div class="labAddress">${lab.address2}</div>`;
+      }
+
+      labInfoTable += `<div class="labCity">${lab.city}, CA</div>
+            <div class="labCert">Certificate Number(s): ${lab.certificateNum}</div>
+          </div>
+            ${reportData}
+         </div>`;
+
+      marker.bindPopup(labInfoTable);
+    });
+  }
+
+  renderSpinner() {
+    console.log('...Loading');
+  }
+
   render() {
     return (
       <div id="map" className={styles.LabMapDims}>
-        { console.log(this.props) }
+        { this.props.labs.length > 0 ? this.renderMapMarkers() : this.renderSpinner() }
       </div>
     )
   }
