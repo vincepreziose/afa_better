@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 import L from 'leaflet';
 import 'leaflet.snogylop';
 import geoJson from '../../data/california';
-import { getLabs } from '../../actions'
+import { getLabs, setMap } from '../../actions'
 import styles from './LabMap.module.css';
 
 class LabMap extends Component {
 
   componentDidMount() {
-    this.props.getLabs();
+    this.initializeMap();
+    this.props.initializeLabs();
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
+
+  initializeMap() {
     this.map = L.map('map', {
       minZoom: 6,
       center: [36.778261, -119.4179324],
@@ -25,10 +33,12 @@ class LabMap extends Component {
           invert: true
         })
       ]
-    })
+    });
+    this.props.setMap(this.map);
   }
 
   renderMapMarkers() {
+    console.log('mapObj', this.props.mapObj)
     this.props.labs.forEach(lab => {
       const coordinates = {
         lat: lab.mapMarker.lat.$numberDecimal,
@@ -72,7 +82,7 @@ class LabMap extends Component {
               </div>
             </div>`;
 
-      const marker = L.marker([coordinates.lat, coordinates.lng]).addTo(this.map);
+      const marker = L.marker([coordinates.lat, coordinates.lng]).addTo(this.props.mapObj);
 
       let labInfoTable = `<div class="container labInfo">
             <div class="labHeaderInfo">
@@ -97,7 +107,7 @@ class LabMap extends Component {
     console.log('...Loading');
   }
 
-  render() {
+  render() {    
     return (
       <div id="map" className={styles.LabMapDims}>
         { this.props.labs.length > 0 ? this.renderMapMarkers() : this.renderSpinner() }
@@ -107,11 +117,13 @@ class LabMap extends Component {
 }
 
 const mapStateToProps = state => ({
+  mapObj: state.map.mapObj,
   labs: state.map.labs
 });
 
 const mapDispatchToProps = dispatch => ({
-  getLabs: () => dispatch(getLabs())
+  setMap: (map) => dispatch(setMap(map)),
+  initializeLabs: () => dispatch(getLabs())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LabMap);

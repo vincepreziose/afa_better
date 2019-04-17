@@ -24,6 +24,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link to="/" className="navbar-brand">Animal Freedom Act!</Link>
+        {this.renderLinks()}
       </nav>
     );
   }
