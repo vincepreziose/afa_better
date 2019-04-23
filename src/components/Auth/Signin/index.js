@@ -20,7 +20,7 @@ class Signin extends Component {
       <div className="container" style={{ marginTop: '200px'}}>
         <div className="row">
           <div className="col-md-4 offset-md-4" style={{ textAlign: 'center'}}>
-            <img src={joeCool} style={{ marginBottom: '20px'}} />>
+            <img src={joeCool} alt="joe cool" style={{ marginBottom: '20px'}} />>
             <form onSubmit={handleSubmit(this.onSubmit)}>
               <div className="form-group">
                 <Field
