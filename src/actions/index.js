@@ -3,7 +3,9 @@ import { MAP_LABS, MAP_ERROR, AUTH_ERROR, AUTH_USER, MAP_SET } from './types';
 
 export const getLabs = () => async dispatch => {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/labs`);
+    const response = await axios(`${process.env.REACT_APP_API_BASE_URL}/labs`, {
+      headers: {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhbmltYWxmcmVlZG9tYWN0Lm9yZyIsInN1YiI6MiwiZW1haWwiOiJjaGVyeWxiOEBjb21jYXN0Lm5ldCIsImlhdCI6MTU1NTkwNDU0MjUzMX0.5I8vEy01NpYCIZGZEvcp7ENaH95RX-WTo1NJEINzLdM'}
+    });
     dispatch({ type: MAP_LABS, payload: response.data });
   } catch (e) {
     dispatch({ type: MAP_ERROR, payload: 'Whoops! Something went wrong!' });
