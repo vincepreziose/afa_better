@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getLabs } from '../../actions';
+import styles from './Admin.module.css';
 
 class Admin extends Component {
 
@@ -11,11 +12,18 @@ class Admin extends Component {
     }
   }
 
+  handleRowClick(lab) {
+    this.props.history.push(`/admin/lab/${lab.id}`)
+  }
+
   renderLabList() {
     let rows = [];
     this.props.labs.forEach(lab => {
       rows.push(
-        <tr key={lab.id}>
+        <tr
+          className={styles.LabRow}
+          key={lab.id}
+          onClick={() => this.handleRowClick(lab)}>
           <td>{lab.name}</td>
           <td>{lab.address1}</td>
           <td>{lab.address2}</td>
