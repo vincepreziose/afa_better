@@ -12,14 +12,21 @@ class Admin extends Component {
   }
 
   renderLabList() {
+    let rows = [];
+    this.props.labs.forEach(lab => {
+      rows.push(
+        <tr key={lab.id}>
+          <td>{lab.name}</td>
+          <td>{lab.address1}</td>
+          <td>{lab.address2}</td>
+          <td>{lab.city}</td>
+          <td>{lab.certificateNum}</td>
+        </tr>
+      );
+    });
+
     return (
-      <tr>
-        <td>1,001</td>
-        <td>Lorem</td>
-        <td>ipsum</td>
-        <td>dolor</td>
-        <td>sit</td>
-      </tr>
+      rows
     )
   }
 
@@ -71,8 +78,7 @@ class Admin extends Component {
               <button className="btn btn-sm btn-outline-secondary">Export</button>
             </div>
           </div>
-        </div>  
-
+        </div>
 
           <div className="table-responsive">
             <table className="table table-striped table-sm">
