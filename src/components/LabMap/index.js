@@ -14,7 +14,7 @@ class LabMap extends Component {
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate');
+    // console.log('componentDidUpdate');
   }
 
   initializeMap() {
@@ -38,11 +38,10 @@ class LabMap extends Component {
   }
 
   renderMapMarkers() {
-    console.log('mapObj', this.props.mapObj)
     this.props.labs.forEach(lab => {
       const coordinates = {
-        lat: lab.mapMarker.lat.$numberDecimal,
-        lng: lab.mapMarker.long.$numberDecimal
+        lat: lab.mapMarker.lat,
+        lng: lab.mapMarker.lng
       }
 
       let reportData = `<div class="row">
@@ -59,13 +58,13 @@ class LabMap extends Component {
               </thead>
               <tbody>`;
 
-      lab.reportData.data.forEach(data => {
-        data.a = typeof data.a == 'undefined' ? '' : data.a;
-        data.b = typeof data.b == 'undefined' ? '' : data.b;
-        data.c = typeof data.c == 'undefined' ? '' : data.c;
-        data.d = typeof data.d == 'undefined' ? '' : data.d;
-        data.e = typeof data.e == 'undefined' ? '' : data.e;
-        data.notes = typeof data.notes == 'undefined' ? '' : data.notes;
+      lab.reportData.forEach(data => {
+        data.a = !data.a ? '' : data.a;
+        data.b = !data.b ? '' : data.b;
+        data.c = !data.c ? '' : data.c;
+        data.d = !data.d ? '' : data.d;
+        data.e = !data.e ? '' : data.e;
+        data.notes = !data.notes ? '' : data.notes;
 
         reportData += `<tr>
                   <td class="firstColumn">${data.a}</td>
@@ -105,6 +104,13 @@ class LabMap extends Component {
 
   renderSpinner() {
     console.log('...Loading');
+    if (this.props.errorMessage !== '') {
+      // add an alert here
+      console.log('Houston, we have a problem!');
+      console.log(this.props.errorMessage)
+    } else {
+      // add spinner jsx here
+    }
   }
 
   render() {    
@@ -118,7 +124,8 @@ class LabMap extends Component {
 
 const mapStateToProps = state => ({
   mapObj: state.map.mapObj,
-  labs: state.map.labs
+  labs: state.map.labs,
+  errorMessage: state.map.errorMessage
 });
 
 const mapDispatchToProps = dispatch => ({
