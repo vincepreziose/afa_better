@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getLabs } from '../../actions';
+import AdminHeader from './AdminHeader';
+import AdminSidebar from './AdminSidebar';
 import styles from './Admin.module.css';
 
 class Admin extends Component {
@@ -46,47 +48,12 @@ class Admin extends Component {
     return (
       <div className="container-fluid">
       <div className="row">
-        <nav className="col-md-2 d-none d-md-block bg-light sidebar">
-          <div className="sidebar-sticky">
-            <ul className="nav flex-column">
-              <li className="nav-item">
-                <Link className="nav-link active" to="/admin">
-                  <span data-feather="home"></span>
-                  Dashboard <span className="sr-only">(current)</span>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  <span data-feather="file"></span>
-                  Add Lab
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  <span data-feather="shopping-cart"></span>
-                  Edit Lab
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  <span data-feather="users"></span>
-                  Delete Lab
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
+        <AdminSidebar />
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-          <h1 className="h2">Dashboard</h1>
-          <div className="btn-toolbar mb-2 mb-md-0">
-            <div className="btn-group mr-2">
-              <button className="btn btn-sm btn-outline-secondary">Share</button>
-              <button className="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-          </div>
-        </div>
+          <AdminHeader
+            headerText="Laboratories"
+            buttonText="Export"
+          />
 
           <div className="table-responsive">
             <table className="table table-striped table-sm">
