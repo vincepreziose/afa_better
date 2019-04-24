@@ -13,7 +13,7 @@ const AdminSidebar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="#">
+            <Link className="nav-link" to="/admin/lab/add">
               <span data-feather="file"></span>
               Add Lab
             </Link>

@@ -5,9 +5,9 @@ import _ from 'lodash';
 import AdminSidebar from '../AdminSidebar';
 import AdminHeader from '../AdminHeader';
 import {getLabs} from "../../../actions";
-import styles from './LabView.module.css';
+import styles from './LabAdd.module.css';
 
-class LabView extends Component {
+class LabAdd extends Component {
   state = {
     labId: null
   }
@@ -127,4 +127,4 @@ const mapDispatchToProps = dispatch => ({
   initializeLabs: () => dispatch(getLabs())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LabView);
+export default connect(mapStateToProps, mapDispatchToProps)(LabAdd);
