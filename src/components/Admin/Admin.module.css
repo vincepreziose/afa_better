@@ -1,0 +1,6 @@
+.LabRow {
+    cursor: pointer;
+}
+.LabRow:hover {
+    color: dodgerblue;
+}

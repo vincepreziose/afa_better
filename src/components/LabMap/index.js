@@ -7,14 +7,13 @@ import { getLabs, setMap } from '../../actions'
 import styles from './LabMap.module.css';
 
 class LabMap extends Component {
-
   componentDidMount() {
     this.initializeMap();
     this.props.initializeLabs();
   }
 
   componentDidUpdate() {
-    // console.log('componentDidUpdate');
+    // console.log('componentDidUpdate')
   }
 
   initializeMap() {
@@ -113,12 +112,20 @@ class LabMap extends Component {
     }
   }
 
-  render() {    
-    return (
-      <div id="map" className={styles.LabMapDims}>
-        { this.props.labs.length > 0 ? this.renderMapMarkers() : this.renderSpinner() }
-      </div>
-    )
+  render() {
+    if (Object.entries(this.props.mapObj).length === 0 && this.props.mapObj.constructor === Object) {
+      return (
+        <div id="map" className={styles.LabMapDims}>
+          { this.renderSpinner() }
+        </div>
+      )
+    } else {
+      return (
+        <div id="map" className={styles.LabMapDims}>
+          { this.props.labs.length > 0 ? this.renderMapMarkers() : this.renderSpinner() }
+        </div>
+      )
+    }
   }
 }
 

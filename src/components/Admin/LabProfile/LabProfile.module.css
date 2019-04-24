@@ -1,0 +1,32 @@
+.ReportDataHeader {
+    margin: 15px 0 20px;
+}
+.LabInfoText {
+    font-weight: normal;
+}
+.LabInfoHeader {
+    margin: 15px 0;
+}
+.Row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.Column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+.ColumnOne {
+    height: 200px;
+    margin-right: 20px;
+}
+.ColumnTwo {
+    height: 200px;
+    margin-left: 50px;
+}
+.BottomPush {
+    margin-bottom: 15px;
+}
