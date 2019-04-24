@@ -9,19 +9,13 @@ const AdminSidebar = () => {
           <li className="nav-item">
             <Link className="nav-link active" to="/admin">
               <span data-feather="home"></span>
-              Dashboard <span className="sr-only">(current)</span>
+              All Labs <span className="sr-only">(current)</span>
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="#">
               <span data-feather="file"></span>
               Add Lab
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="#">
-              <span data-feather="shopping-cart"></span>
-              Edit Lab
             </Link>
           </li>
           <li className="nav-item">
