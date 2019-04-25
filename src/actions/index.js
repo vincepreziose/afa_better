@@ -22,6 +22,7 @@ export const setMap = (map) => async dispatch => {
 
 export const signin = (formProps, callback) => async dispatch => {
   try {
+    console.log('base url: ', REACT_APP_API_BASE_URL);
     const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/signin`, formProps);
 
     dispatch({ type: AUTH_USER, payload: response.data.token });
