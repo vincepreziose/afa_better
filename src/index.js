@@ -7,6 +7,7 @@ import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import App from './components/App';
 import './index.css';
+import * as serviceWorker from './serviceWorker';
 
 const store = createStore(
   reducers,
@@ -24,3 +25,5 @@ render(
   </Provider>,
   document.querySelector('#root')
 );
+
+serviceWorker.unregister();
