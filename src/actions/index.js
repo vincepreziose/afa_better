@@ -22,7 +22,7 @@ export const setMap = (map) => async dispatch => {
 
 export const signin = (formProps, callback) => async dispatch => {
   try {
-    const response = await axios.post('http://localhost:3001/auth/signin', formProps);
+    const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/signin`, formProps);
 
     dispatch({ type: AUTH_USER, payload: response.data.token });
     localStorage.setItem('token', response.data.token);
