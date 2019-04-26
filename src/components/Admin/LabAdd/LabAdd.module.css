@@ -20,11 +20,11 @@
     flex: 1;
 }
 .ColumnOne {
-    height: 200px;
+    height: 225px;
     margin-right: 20px;
 }
 .ColumnTwo {
-    height: 200px;
+    height: 225px;
     margin-left: 50px;
 }
 .BottomPush {
