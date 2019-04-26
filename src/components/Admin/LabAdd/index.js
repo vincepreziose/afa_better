@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
+import { reduxForm, Field } from 'redux-form';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import * as actions from '../../../actions';
 import AdminSidebar from '../AdminSidebar';
 import AdminHeader from '../AdminHeader';
-import {getLabs} from "../../../actions";
 import styles from './LabAdd.module.css';
 
 class LabAdd extends Component {
 
   state = {
     rows: []
+  }
+
+  onSubmit = (formProps) => {
+    console.log('Form Props: ', formProps)
+  };
+
+  handleAddRow(e) {
+    console.log('handleAddRow');
+    console.log(e.target)
+    e.preventDefault();
   }
 
   renderReportData() {
@@ -53,15 +65,60 @@ class LabAdd extends Component {
         <div className={styles.Row}>
           <div className={styles.Column}>
             <div className={styles.ColumnOne}>
-              <h5 className={styles.BottomPush}>Name: <br /><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
-              <h5 className={styles.BottomPush}>Address1: <br/> <span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
-              <h5>Address2: <br/><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
+              <h5 className={styles.BottomPush}>Name: <br />
+                <span className={styles.LabInfoText}>
+                  <Field
+                    name="name"
+                    className="form-control"
+                    component="input"
+                    autoComplete="none"
+                  />
+                </span>
+              </h5>
+              <h5 className={styles.BottomPush}>Address1: <br/>
+                <span className={styles.LabInfoText}>
+                  <Field
+                    name="address1"
+                    className="form-control"
+                    component="input"
+                    autoComplete="none"
+                  />
+                </span>
+              </h5>
+              <h5>Address2: <br/>
+                <span className={styles.LabInfoText}>
+                  <Field
+                    name="address2"
+                    className="form-control"
+                    component="input"
+                    autoComplete="none"
+                  />
+                </span>
+              </h5>
             </div>
           </div>
           <div className={styles.Column}>
             <div className={styles.ColumnTwo}>
-              <h5 className={styles.BottomPush}>City: <br/><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
-              <h5>Certificate Number: <br/><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
+              <h5 className={styles.BottomPush}>City: <br/>
+                <span className={styles.LabInfoText}>
+                  <Field
+                    name="city"
+                    className="form-control"
+                    component="input"
+                    autoComplete="none"
+                  />
+                </span>
+              </h5>
+              <h5>Certificate Number: <br/>
+                <span className={styles.LabInfoText}>
+                  <Field
+                    name="certificateNum"
+                    className="form-control"
+                    component="input"
+                    autoComplete="none"
+                  />
+                </span>
+              </h5>
             </div>
           </div>
         </div>
@@ -70,10 +127,11 @@ class LabAdd extends Component {
   }
 
   renderLabForm() {
+    const { handleSubmit } = this.props;
     return (
       <div>
         <hr/>
-        <form action="">
+        <form onSubmit={handleSubmit(this.onSubmit)}>
           { this.renderLabInfoHeader() }
           <hr/>
           <h4 className={styles.ReportDataHeader}>Report Data</h4>
@@ -94,6 +152,17 @@ class LabAdd extends Component {
               </tbody>
             </table>
           </div>
+            <div className="btn-toolbar mb-2 mb-md-0">
+              <div className="btn-group mr-2">
+                <button
+                  onClick={this.handleAddRow}
+                  className="btn btn-sm btn-outline-secondary">Add Row
+                </button>
+              </div>
+            </div>
+            <div style={{ width: '300px', marginTop: '35px' }}>
+              <button type="submit" className="btn btn-block btn-success">Add Lab</button>
+            </div>
         </form>
       </div>
     )
@@ -108,10 +177,8 @@ class LabAdd extends Component {
 
             <AdminHeader
               headerText="Add Lab"
-              buttonText="Submit"
             />
 
-            { console.log(this.props) }
             { this.renderLabForm() }
 
           </main>
@@ -121,12 +188,6 @@ class LabAdd extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  labs: state.map.labs
-});
-
-const mapDispatchToProps = dispatch => ({
-  initializeLabs: () => dispatch(getLabs())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(LabAdd);
+export default compose(connect(null, actions), reduxForm({ form: 'addLab' }))(
+  LabAdd
+);

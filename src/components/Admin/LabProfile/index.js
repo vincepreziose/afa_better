@@ -103,7 +103,6 @@ class LabProfile extends Component {
 
             <AdminHeader
               headerText="Lab Profile"
-              buttonText="Edit"
             />
 
             { this.props.labs.length > 0 ? this.renderLab() : this.renderSpinner() }
