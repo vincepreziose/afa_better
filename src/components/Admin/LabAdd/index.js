@@ -47,46 +47,54 @@ class LabAdd extends Component {
     )
   }
 
+  renderLabInfoHeader() {
+    return (
+      <div className={styles.LabInfoHeader}>
+        <div className={styles.Row}>
+          <div className={styles.Column}>
+            <div className={styles.ColumnOne}>
+              <h5 className={styles.BottomPush}>Name: <br /><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
+              <h5 className={styles.BottomPush}>Address1: <br/> <span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
+              <h5>Address2: <br/><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
+            </div>
+          </div>
+          <div className={styles.Column}>
+            <div className={styles.ColumnTwo}>
+              <h5 className={styles.BottomPush}>City: <br/><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
+              <h5>Certificate Number: <br/><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   renderLabForm() {
     return (
       <div>
         <hr/>
-        <div className={styles.LabInfoHeader}>
-          <div className={styles.Row}>
-            <div className={styles.Column}>
-              <div className={styles.ColumnOne}>
-                <h5 className={styles.BottomPush}>Name: <br /><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
-                <h5 className={styles.BottomPush}>Address1: <br/> <span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
-                <h5>Address2: <br/><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
-              </div>
-            </div>
-            <div className={styles.Column}>
-              <div className={styles.ColumnTwo}>
-                <h5 className={styles.BottomPush}>City: <br/><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
-                <h5>Certificate Number: <br/><span className={styles.LabInfoText}><input className="form-control" type="text"/></span></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr/>
-        <h4 className={styles.ReportDataHeader}>Report Data</h4>
-        <div className="table-responsive">
-          <table className="table table-striped table-sm">
-            <thead>
-            <tr style={{ textAlign: 'center' }}>
-              <th>A</th>
-              <th>B</th>
-              <th>C</th>
-              <th>D</th>
-              <th>E</th>
-              <th>Notes</th>
-            </tr>
-            </thead>
-            <tbody>
+        <form action="">
+          { this.renderLabInfoHeader() }
+          <hr/>
+          <h4 className={styles.ReportDataHeader}>Report Data</h4>
+          <div className="table-responsive">
+            <table className="table table-striped table-sm">
+              <thead>
+              <tr style={{ textAlign: 'center' }}>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>Notes</th>
+              </tr>
+              </thead>
+              <tbody>
               { this.renderReportData() }
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        </form>
       </div>
     )
   }
