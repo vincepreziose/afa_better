@@ -43,7 +43,7 @@ class Signin extends Component {
                 />
               </div>
               <div>{this.props.errorMessage}</div>
-              <button type="submit" class="btn btn-block btn-outline-primary">Sign in</button>
+              <button type="submit" className="btn btn-block btn-outline-primary">Sign in</button>
             </form>
           </div>
         </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getLabs } from '../../actions';
 import AdminHeader from './AdminHeader';
 import AdminSidebar from './AdminSidebar';
@@ -52,7 +51,6 @@ class Admin extends Component {
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
           <AdminHeader
             headerText="Laboratories"
-            buttonText="Export"
           />
 
           <div className="table-responsive">
