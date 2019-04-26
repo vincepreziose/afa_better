@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
-import _ from 'lodash';
 import AdminSidebar from '../AdminSidebar';
 import AdminHeader from '../AdminHeader';
 import {getLabs} from "../../../actions";
@@ -49,8 +47,6 @@ class LabProfile extends Component {
     let lab = this.props.labs.find((lab) => {
       return lab.id === arg.labId
     }, this.state);
-
-    // console.log(lab)
 
     if (lab) {
       return (

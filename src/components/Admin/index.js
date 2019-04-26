@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getLabs } from '../../actions';
 import AdminHeader from './AdminHeader';
 import AdminSidebar from './AdminSidebar';
