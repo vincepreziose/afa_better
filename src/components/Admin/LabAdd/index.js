@@ -75,7 +75,7 @@ class LabAdd extends Component {
             name="animals_latest"
             style={{ width: '100%'}}
             value={this.state.animalsLatest}
-            onChange={this.updateAnimalsLatest.bind(this)}
+            onChange={this.updateAnimalsLatest}
           />
         </td>
         <td className={styles.ReportDataNumeric}>
