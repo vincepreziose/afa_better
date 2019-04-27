@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import AdminSidebar from '../AdminSidebar';
@@ -9,7 +7,11 @@ import styles from './LabAdd.module.css';
 
 class LabAdd extends Component {
   state = {
-    reportRows: [],
+    name: '',
+    address1: '',
+    address2: '',
+    city: '',
+    certificate: '',
     catALatest: '',
     catBLatest: '',
     catCLatest: '',
@@ -21,6 +23,33 @@ class LabAdd extends Component {
   onSubmit = (formProps) => {
     console.log('Form Props: ', formProps)
   };
+
+  updateName = (e) => {
+    this.setState({
+      name: e.target.value
+    });
+  }
+
+  updateAddress1 = (e) => {
+    this.setState({
+      address1: e.target.value
+    });
+  }
+  updateAddress2 = (e) => {
+    this.setState({
+      address2: e.target.value
+    });
+  }
+  updateCity = (e) => {
+    this.setState({
+      city: e.target.value
+    });
+  }
+  updateCertificate = (e) => {
+    this.setState({
+      certificate: e.target.value
+    });
+  }
 
   updateCatALatest = (e) => {
     this.setState({
@@ -64,13 +93,24 @@ class LabAdd extends Component {
       notes: this.state.notesLatest,
     };
 
-    console.log(newRow)
-    console.log(this.state.reportRows)
+    const reportRows = this.props.reportData;
+    reportRows.push(newRow);
+    this.props.updateAddLabReportData(reportRows);
+
+    this.setState({
+      catALatest: '',
+      catBLatest: '',
+      catCLatest: '',
+      catDLatest: '',
+      catELatest: '',
+      notesLatest: ''
+    })
   };
 
   renderReportData() {
     let reportRecord = [];
-    this.state.reportRows.forEach((row, i) => {
+    console.log("renderReportData: ", this.props.reportData)
+    this.props.reportData.forEach((row, i) => {
       reportRecord.push(
         <tr key={i}>
           <td>{row.a}</td>
@@ -145,32 +185,29 @@ class LabAdd extends Component {
             <div className={styles.ColumnOne}>
               <h5 className={styles.BottomPush}>Name: <br />
                 <span className={styles.LabInfoText}>
-                  <Field
-                    name="name"
+                  <input
+                    value={this.state.name}
+                    onChange={this.updateName}
                     className="form-control"
-                    component="input"
-                    autoComplete="none"
                   />
                 </span>
               </h5>
               <h5 className={styles.BottomPush}>Address1: <br/>
                 <span className={styles.LabInfoText}>
-                  <Field
-                    name="address1"
-                    className="form-control"
-                    component="input"
-                    autoComplete="none"
-                  />
+                   <input
+                     value={this.state.address1}
+                     onChange={this.updateAddress1}
+                     className="form-control"
+                   />
                 </span>
               </h5>
               <h5>Address2: <br/>
                 <span className={styles.LabInfoText}>
-                  <Field
-                    name="address2"
-                    className="form-control"
-                    component="input"
-                    autoComplete="none"
-                  />
+                   <input
+                     value={this.state.address2}
+                     onChange={this.updateAddress2}
+                     className="form-control"
+                   />
                 </span>
               </h5>
             </div>
@@ -179,22 +216,20 @@ class LabAdd extends Component {
             <div className={styles.ColumnTwo}>
               <h5 className={styles.BottomPush}>City: <br/>
                 <span className={styles.LabInfoText}>
-                  <Field
-                    name="city"
-                    className="form-control"
-                    component="input"
-                    autoComplete="none"
-                  />
+                   <input
+                     value={this.state.city}
+                     onChange={this.updateCity}
+                     className="form-control"
+                   />
                 </span>
               </h5>
               <h5>Certificate Number: <br/>
                 <span className={styles.LabInfoText}>
-                  <Field
-                    name="certificateNum"
-                    className="form-control"
-                    component="input"
-                    autoComplete="none"
-                  />
+                   <input
+                     value={this.state.certificate}
+                     onChange={this.updateCertificate}
+                     className="form-control"
+                   />
                 </span>
               </h5>
             </div>
@@ -205,11 +240,10 @@ class LabAdd extends Component {
   }
 
   renderLabForm() {
-    const { handleSubmit } = this.props;
     return (
       <div>
         <hr/>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <form onSubmit={this.onSubmit}>
           { this.renderLabInfoHeader() }
           <hr/>
           <h4 className={styles.ReportDataHeader}>Report Data</h4>
@@ -267,6 +301,15 @@ class LabAdd extends Component {
   }
 }
 
-export default compose(connect(null, actions), reduxForm({ form: 'addLab' }))(
-  LabAdd
-);
+// const mapStateToProps = state => ({
+//   reportData: state.labReport.data
+// });
+
+function mapStateToProps(state) {
+  // console.log(state.labReport.data)
+  return {
+    reportData: state.labReport.data
+  }
+}
+
+export default connect(mapStateToProps, actions)(LabAdd);
