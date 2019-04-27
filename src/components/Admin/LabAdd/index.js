@@ -8,7 +8,6 @@ import AdminHeader from '../AdminHeader';
 import styles from './LabAdd.module.css';
 
 class LabAdd extends Component {
-
   state = {
     rows: []
   };
@@ -17,11 +16,27 @@ class LabAdd extends Component {
     console.log('Form Props: ', formProps)
   };
 
-  handleAddRow(e) {
-    console.log('handleAddRow');
-    console.log(e.target)
+  handleNewRow = (e) => {
     e.preventDefault();
-  }
+    const newRow = {
+      a: this.refs.catALatest.value,
+      b: this.refs.catBLatest.value,
+      c: this.refs.catCLatest.value,
+      d: this.refs.catDLatest.value,
+      ee: this.refs.catELatest.value,
+      notes: this.refs.notes.value,
+    }
+
+    let rows = this.state.rows;
+    rows.push(newRow)
+
+    this.setState({
+      rows: rows
+    })
+
+    console.log(this.props)
+
+  };
 
   renderReportData() {
     let reportRecord = [];
@@ -32,20 +47,73 @@ class LabAdd extends Component {
           <td>{row.b}</td>
           <td>{row.c}</td>
           <td>{row.d}</td>
-          <td>{row.e}</td>
+          <td>{row.ee}</td>
           <td>{row.notes}</td>
         </tr>
       );
     });
 
     reportRecord.push(
-      <tr key={0} style={{backgroundColor: 'white' }}>
-        <td style={{ paddingLeft: '0', width: '30%' }}><input style={{ width: '100%'}} type="text"/></td>
-        <td className={styles.ReportDataNumeric}><input style={{ width: '100%'}}  type="text"/></td>
-        <td className={styles.ReportDataNumeric}><input style={{ width: '100%'}}  type="text"/></td>
-        <td className={styles.ReportDataNumeric}><input style={{ width: '100%'}}  type="text"/></td>
-        <td className={styles.ReportDataNumeric}><input style={{ width: '100%'}}  type="text"/></td>
-        <td style={{ paddingRight: '0' }}><textarea style={{ width: '100%', border: '1px solid #CCCCCC'}} rows="1"></textarea></td>
+      <tr key="latest" style={{backgroundColor: 'white' }}>
+        <td style={{ paddingLeft: '0', width: '30%' }}>
+          <Field
+            name="animals_latest"
+            type="text"
+            component="input"
+            autoComplete="none"
+            style={{ width: '100%'}}
+            ref="catALatest"
+          />
+        </td>
+        <td className={styles.ReportDataNumeric}>
+          <Field
+            name="cat_b_latest"
+            type="text"
+            component="input"
+            autoComplete="none"
+            style={{ width: '100%'}}
+            ref="catBLatest"
+          />
+        </td>
+        <td className={styles.ReportDataNumeric}>
+          <Field
+            name="cat_c_latest"
+            type="text"
+            component="input"
+            autoComplete="none"
+            style={{ width: '100%'}}
+            ref="catCLatest"
+          />
+        </td>
+        <td className={styles.ReportDataNumeric}>
+          <Field
+            name="cat_d_latest"
+            type="text"
+            component="input"
+            autoComplete="none"
+            style={{ width: '100%'}}
+            ref="catDLatest"
+          />
+        </td>
+        <td className={styles.ReportDataNumeric}>
+          <Field
+            name="cat_e_latest"
+            type="text"
+            component="input"
+            autoComplete="none"
+            style={{ width: '100%'}}
+            ref="catELatest"
+          />
+        </td>
+        <td style={{ paddingRight: '0' }}>
+          <Field
+            name="notes_latest"
+            component="textarea"
+            style={{ width: '100%', border: '1px solid #CCCCCC'}}
+            rows="1"
+            ref="notes"
+          />
+        </td>
       </tr>
     );
 
@@ -151,7 +219,7 @@ class LabAdd extends Component {
               <div className="btn-group mr-2">
                 <button
                   style={{ boxShadow: 'none'}}
-                  onClick={this.handleAddRow}
+                  onClick={this.handleNewRow}
                   className="btn btn-sm btn-outline-secondary">Add Row
                 </button>
               </div>
