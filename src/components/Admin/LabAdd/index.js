@@ -9,53 +9,68 @@ import styles from './LabAdd.module.css';
 
 class LabAdd extends Component {
   state = {
-    rows: [],
-    animalsLatest: ''
+    reportRows: [],
+    catALatest: '',
+    catBLatest: '',
+    catCLatest: '',
+    catDLatest: '',
+    catELatest: '',
+    notesLatest: '',
   };
 
   onSubmit = (formProps) => {
     console.log('Form Props: ', formProps)
   };
 
-  updateAnimalsLatest = (e) => {
+  updateCatALatest = (e) => {
     this.setState({
-      animalsLatest: e.target.value
+      catALatest: e.target.value
     });
-
-    // console.log(this.state.animalsLatest)
+  }
+  updateCatBLatest = (e) => {
+    this.setState({
+      catBLatest: e.target.value
+    });
+  }
+  updateCatCLatest = (e) => {
+    this.setState({
+      catCLatest: e.target.value
+    });
+  }
+  updateCatDLatest = (e) => {
+    this.setState({
+      catDLatest: e.target.value
+    });
+  }
+  updateCatELatest = (e) => {
+    this.setState({
+      catELatest: e.target.value
+    });
+  }
+  updateNotesLatest = (e) => {
+    this.setState({
+      notesLatest: e.target.value
+    });
   }
 
   handleNewRow = (e) => {
     e.preventDefault();
-    // const newRow = {
-    //   a: this.refs.catALatest.value,
-    //   b: this.refs.catBLatest.value,
-    //   c: this.refs.catCLatest.value,
-    //   d: this.refs.catDLatest.value,
-    //   ee: this.refs.catELatest.value,
-    //   notes: this.refs.notes.value,
-    // }
-    //
-    // let rows = this.state.rows;
-    // rows.push(newRow)
-    //
-    // this.setState({
-    //   rows: rows
-    // })
-    //
-    // console.log(newRow)
+    const newRow = {
+      a: this.state.catALatest,
+      b: this.state.catBLatest,
+      c: this.state.catCLatest,
+      d: this.state.catDLatest,
+      e: this.state.catELatest,
+      notes: this.state.notesLatest,
+    };
 
-    console.log(this.state.animalsLatest)
-
-    this.setState({
-      animalsLatest: ''
-    });
-
+    console.log(newRow)
+    console.log(this.state.reportRows)
   };
 
   renderReportData() {
     let reportRecord = [];
-    this.state.rows.forEach((row, i) => {
+    this.state.reportRows.forEach((row, i) => {
       reportRecord.push(
         <tr key={i}>
           <td>{row.a}</td>
@@ -72,60 +87,47 @@ class LabAdd extends Component {
       <tr key="latest" style={{backgroundColor: 'white' }}>
         <td style={{ paddingLeft: '0', width: '30%' }}>
           <input
-            name="animals_latest"
             style={{ width: '100%'}}
-            value={this.state.animalsLatest}
-            onChange={this.updateAnimalsLatest}
+            value={this.state.catALatest}
+            onChange={this.updateCatALatest}
           />
         </td>
         <td className={styles.ReportDataNumeric}>
-          <Field
-            name="cat_b_latest"
-            type="text"
-            component="input"
-            autoComplete="none"
+          <input
             style={{ width: '100%'}}
-            ref="catBLatest"
+            value={this.state.catBLatest}
+            onChange={this.updateCatBLatest}
           />
         </td>
         <td className={styles.ReportDataNumeric}>
-          <Field
-            name="cat_c_latest"
-            type="text"
-            component="input"
-            autoComplete="none"
+          <input
             style={{ width: '100%'}}
-            ref="catCLatest"
+            value={this.state.catCLatest}
+            onChange={this.updateCatCLatest}
           />
         </td>
         <td className={styles.ReportDataNumeric}>
-          <Field
-            name="cat_d_latest"
-            type="text"
-            component="input"
-            autoComplete="none"
+          <input
             style={{ width: '100%'}}
-            ref="catDLatest"
+            value={this.state.catDLatest}
+            onChange={this.updateCatDLatest}
           />
         </td>
         <td className={styles.ReportDataNumeric}>
-          <Field
-            name="cat_e_latest"
-            type="text"
-            component="input"
-            autoComplete="none"
+          <input
             style={{ width: '100%'}}
-            ref="catELatest"
+            value={this.state.catELatest}
+            onChange={this.updateCatELatest}
           />
         </td>
         <td style={{ paddingRight: '0' }}>
-          <Field
-            name="notes_latest"
-            component="textarea"
-            style={{ width: '100%', border: '1px solid #CCCCCC'}}
+          <textarea
             rows="1"
-            ref="notes"
-          />
+            style={{ width: '100%', border: '1px solid #CCCCCC'}}
+            value={this.state.notesLatest}
+            onChange={this.updateNotesLatest}
+          >
+          </textarea>
         </td>
       </tr>
     );
