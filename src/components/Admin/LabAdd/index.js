@@ -11,7 +11,7 @@ class LabAdd extends Component {
 
   state = {
     rows: []
-  }
+  };
 
   onSubmit = (formProps) => {
     console.log('Form Props: ', formProps)
@@ -39,18 +39,13 @@ class LabAdd extends Component {
     });
 
     reportRecord.push(
-      <tr
-        key={0}
-        style={{
-          backgroundColor: 'white'
-        }}
-      >
-        <td style={{ paddingLeft: '0' }}><input style={{ width: '100%'}} type="text"/></td>
-        <td><input style={{ width: '100%'}}  type="text"/></td>
-        <td><input style={{ width: '100%'}}  type="text"/></td>
-        <td><input style={{ width: '100%'}}  type="text"/></td>
-        <td><input style={{ width: '100%'}}  type="text"/></td>
-        <td style={{ paddingRight: '0' }}><input style={{ width: '100%'}}  type="text"/></td>
+      <tr key={0} style={{backgroundColor: 'white' }}>
+        <td style={{ paddingLeft: '0', width: '30%' }}><input style={{ width: '100%'}} type="text"/></td>
+        <td className={styles.ReportDataNumeric}><input style={{ width: '100%'}}  type="text"/></td>
+        <td className={styles.ReportDataNumeric}><input style={{ width: '100%'}}  type="text"/></td>
+        <td className={styles.ReportDataNumeric}><input style={{ width: '100%'}}  type="text"/></td>
+        <td className={styles.ReportDataNumeric}><input style={{ width: '100%'}}  type="text"/></td>
+        <td style={{ paddingRight: '0' }}><textarea style={{ width: '100%', border: '1px solid #CCCCCC'}} rows="1"></textarea></td>
       </tr>
     );
 
@@ -155,13 +150,14 @@ class LabAdd extends Component {
             <div className="btn-toolbar mb-2 mb-md-0">
               <div className="btn-group mr-2">
                 <button
+                  style={{ boxShadow: 'none'}}
                   onClick={this.handleAddRow}
                   className="btn btn-sm btn-outline-secondary">Add Row
                 </button>
               </div>
             </div>
             <div style={{ width: '300px', marginTop: '35px' }}>
-              <button type="submit" className="btn btn-block btn-success">Add Lab</button>
+              <button type="submit" style={{ boxShadow: 'none' }} className="btn btn-block btn-success">Add Lab</button>
             </div>
         </form>
       </div>
