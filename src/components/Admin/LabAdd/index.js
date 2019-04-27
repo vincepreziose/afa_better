@@ -9,32 +9,47 @@ import styles from './LabAdd.module.css';
 
 class LabAdd extends Component {
   state = {
-    rows: []
+    rows: [],
+    animalsLatest: ''
   };
 
   onSubmit = (formProps) => {
     console.log('Form Props: ', formProps)
   };
 
+  updateAnimalsLatest = (e) => {
+    this.setState({
+      animalsLatest: e.target.value
+    });
+
+    // console.log(this.state.animalsLatest)
+  }
+
   handleNewRow = (e) => {
     e.preventDefault();
-    const newRow = {
-      a: this.refs.catALatest.value,
-      b: this.refs.catBLatest.value,
-      c: this.refs.catCLatest.value,
-      d: this.refs.catDLatest.value,
-      ee: this.refs.catELatest.value,
-      notes: this.refs.notes.value,
-    }
+    // const newRow = {
+    //   a: this.refs.catALatest.value,
+    //   b: this.refs.catBLatest.value,
+    //   c: this.refs.catCLatest.value,
+    //   d: this.refs.catDLatest.value,
+    //   ee: this.refs.catELatest.value,
+    //   notes: this.refs.notes.value,
+    // }
+    //
+    // let rows = this.state.rows;
+    // rows.push(newRow)
+    //
+    // this.setState({
+    //   rows: rows
+    // })
+    //
+    // console.log(newRow)
 
-    let rows = this.state.rows;
-    rows.push(newRow)
+    console.log(this.state.animalsLatest)
 
     this.setState({
-      rows: rows
-    })
-
-    console.log(this.props)
+      animalsLatest: ''
+    });
 
   };
 
@@ -56,13 +71,11 @@ class LabAdd extends Component {
     reportRecord.push(
       <tr key="latest" style={{backgroundColor: 'white' }}>
         <td style={{ paddingLeft: '0', width: '30%' }}>
-          <Field
+          <input
             name="animals_latest"
-            type="text"
-            component="input"
-            autoComplete="none"
             style={{ width: '100%'}}
-            ref="catALatest"
+            value={this.state.animalsLatest}
+            onChange={this.updateAnimalsLatest.bind(this)}
           />
         </td>
         <td className={styles.ReportDataNumeric}>
