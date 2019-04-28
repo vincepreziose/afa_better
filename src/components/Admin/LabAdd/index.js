@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { reduxForm, Field } from 'redux-form';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import AdminSidebar from '../AdminSidebar';
@@ -21,7 +23,7 @@ class LabAdd extends Component {
   };
 
   onSubmit = (formProps) => {
-    console.log('Form Props: ', formProps)
+    console.log('formProps: ', formProps)
   };
 
   updateName = (e) => {
@@ -240,10 +242,11 @@ class LabAdd extends Component {
   }
 
   renderLabForm() {
+    const { handleSubmit } = this.props;
     return (
       <div>
         <hr/>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={handleSubmit(this.onSubmit)}>
           { this.renderLabInfoHeader() }
           <hr/>
           <h4 className={styles.ReportDataHeader}>Report Data</h4>
@@ -312,4 +315,6 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, actions)(LabAdd);
+export default compose(connect(mapStateToProps, actions), reduxForm({ form: 'addLab' }))(
+  LabAdd
+);
