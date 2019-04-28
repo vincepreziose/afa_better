@@ -13,6 +13,14 @@ class Navbar extends Component {
           </li>
         </ul>
       );
+    } else {
+      return (
+        <ul className="navbar-nav px-3">
+          <li className="nav-item text-nowrap">
+            <Link className="nav-link" to="/signin">Sign in</Link>
+          </li>
+        </ul>
+      );
     }
   }
 
