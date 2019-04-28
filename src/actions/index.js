@@ -1,5 +1,17 @@
 import axios from 'axios';
-import { MAP_LABS, MAP_ERROR, AUTH_ERROR, AUTH_USER, MAP_SET } from './types';
+import {
+  MAP_LABS,
+  MAP_ERROR,
+  AUTH_ERROR,
+  AUTH_USER,
+  MAP_SET,
+  REPORT_DATA_UPDATE
+} from './types';
+
+export const updateAddLabReportData = (reportData) => async dispatch => {
+  // TODO: do some stuff before dispatch
+  dispatch({ type: REPORT_DATA_UPDATE, payload: reportData });
+}
 
 export const getLabs = () => async dispatch => {
   try {
@@ -22,7 +34,6 @@ export const setMap = (map) => async dispatch => {
 
 export const signin = (formProps, callback) => async dispatch => {
   try {
-    console.log('base url: ', process.env.REACT_APP_API_BASE_URL);
     const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/signin`, formProps);
 
     dispatch({ type: AUTH_USER, payload: response.data.token });
