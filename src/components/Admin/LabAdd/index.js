@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import * as actions from '../../../actions';
 import AdminSidebar from '../AdminSidebar';
 import AdminHeader from '../AdminHeader';
@@ -56,6 +58,15 @@ class LabAdd extends Component {
     });
   }
 
+  handleRemoveRow = (row) => {
+    const thisObj = { row };
+    const reportData = this.props.reportData.filter((r, i) => {
+      return i !== thisObj.row
+    }, thisObj);
+
+    this.props.updateAddLabReportData(reportData);
+  }
+
   handleNewRow = (e) => {
     e.preventDefault();
     const newRow = {
@@ -67,9 +78,9 @@ class LabAdd extends Component {
       notes: this.state.notesLatest,
     };
 
-    const reportRows = this.props.reportData;
-    reportRows.push(newRow);
-    this.props.updateAddLabReportData(reportRows);
+    const reportData = this.props.reportData;
+    reportData.push(newRow);
+    this.props.updateAddLabReportData(reportData);
 
     this.setState({
       catALatest: '',
@@ -83,16 +94,22 @@ class LabAdd extends Component {
 
   renderReportData() {
     let reportRecord = [];
-    console.log("renderReportData: ", this.props.reportData)
     this.props.reportData.forEach((row, i) => {
       reportRecord.push(
-        <tr key={i}>
+        <tr key={i} >
           <td>{row.a}</td>
           <td>{row.b}</td>
           <td>{row.c}</td>
           <td>{row.d}</td>
           <td>{row.ee}</td>
           <td>{row.notes}</td>
+          <td 
+            row={i}>
+            <FontAwesomeIcon 
+              onClick={(e) => this.handleRemoveRow(i)} 
+              icon={faTimesCircle} 
+            />
+          </td>
         </tr>
       );
     });
@@ -237,6 +254,7 @@ class LabAdd extends Component {
                 <th>D</th>
                 <th>E</th>
                 <th>Notes</th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
