@@ -187,29 +187,38 @@ class LabAdd extends Component {
             <div className={styles.ColumnOne}>
               <h5 className={styles.BottomPush}>Name: <br />
                 <span className={styles.LabInfoText}>
-                  <input
+                  <Field
+                    name="name"
+                    type="text"
+                    component="input"
+                    className="form-control"
                     value={this.state.name}
                     onChange={this.updateName}
-                    className="form-control"
                   />
                 </span>
               </h5>
               <h5 className={styles.BottomPush}>Address1: <br/>
                 <span className={styles.LabInfoText}>
-                   <input
-                     value={this.state.address1}
-                     onChange={this.updateAddress1}
-                     className="form-control"
-                   />
+                   <Field
+                    name="address1"
+                    type="text"
+                    component="input"
+                    className="form-control"
+                    value={this.state.address1}
+                    onChange={this.updateAddress1}
+                  />
                 </span>
               </h5>
               <h5>Address2: <br/>
                 <span className={styles.LabInfoText}>
-                   <input
-                     value={this.state.address2}
-                     onChange={this.updateAddress2}
-                     className="form-control"
-                   />
+                <Field
+                  name="address2"
+                  type="text"
+                  component="input"
+                  className="form-control"
+                  value={this.state.address2}
+                  onChange={this.updateAddress2}
+                />
                 </span>
               </h5>
             </div>
@@ -218,20 +227,26 @@ class LabAdd extends Component {
             <div className={styles.ColumnTwo}>
               <h5 className={styles.BottomPush}>City: <br/>
                 <span className={styles.LabInfoText}>
-                   <input
-                     value={this.state.city}
-                     onChange={this.updateCity}
-                     className="form-control"
-                   />
+                <Field
+                    name="city"
+                    type="text"
+                    component="input"
+                    className="form-control"
+                    value={this.state.city}
+                    onChange={this.updateCity}
+                  />
                 </span>
               </h5>
               <h5>Certificate Number: <br/>
                 <span className={styles.LabInfoText}>
-                   <input
-                     value={this.state.certificate}
-                     onChange={this.updateCertificate}
-                     className="form-control"
-                   />
+                <Field
+                  name="certificate"
+                  type="text"
+                  component="input"
+                  className="form-control"
+                  value={this.state.certificate}
+                  onChange={this.updateCertificate}
+                />
                 </span>
               </h5>
             </div>
