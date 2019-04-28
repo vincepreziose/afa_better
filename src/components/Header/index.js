@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faCaretDown, faTimesCircle} from '@fortawesome/free-solid-svg-icons'
 import styles from './Header.module.css';
 
 class Navbar extends Component {
@@ -17,7 +19,14 @@ class Navbar extends Component {
       return (
         <ul className="navbar-nav px-3">
           <li className="nav-item text-nowrap">
-            <Link className="nav-link" to="/signin">Sign in</Link>
+            <button
+              type="button"
+              style={{ fontFamily: 'Exo', fontSize: '15px', boxShadow: 'none' }}
+              className="btn btn-outline-success">
+              <FontAwesomeIcon
+                icon={faCaretDown}
+              />
+            </button>
           </li>
         </ul>
       );
