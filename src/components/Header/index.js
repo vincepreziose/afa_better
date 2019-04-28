@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import styles from './Header.module.css';
 
 class Navbar extends Component {
   renderLinks() {
@@ -12,22 +13,26 @@ class Navbar extends Component {
           </li>
         </ul>
       );
-    } else {
-      return (
-        <ul className="navbar-nav px-3">
-          <li className="nav-item text-nowrap">
-            <Link className="nav-link" to="/signin">Sign in</Link>
-          </li>
-        </ul>
-      );
     }
   }
 
   render() {
     return (
-      <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <Link to="/" className="navbar-brand col-sm-3 col-md-2 mr-0">Animal Freedom Act!</Link>
-      <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"></input>
+      <nav
+        className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"
+        style={{ height: '48px'}}
+      >
+        <Link
+          to="/"
+          className="navbar-brand"
+          style={{ fontFamily: 'Exo', position: 'absolute', paddingLeft: '15px' }}
+        >Animal Freedom Act!
+        </Link>
+
+      <div style={{ color: 'white', fontFamily: 'Exo', fontSize: '20px', margin: '0 auto' }}>
+        California's Animal Testing Labs
+      </div>
+
       {this.renderLinks()}
     </nav>
     );

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Exo|Muli|Poppins:400,400i,500,500i,600,600i');
+
 body {
   font-size: .875rem;
 }
@@ -131,28 +133,19 @@ html, body, #root {
 /*
  * Navbar
  */
-
+.bg-dark {
+  background-color: #303538!important;
+}
 .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;
   font-size: 1rem;
-  background-color: rgba(0, 0, 0, .25);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
 }
 
-.navbar .form-control {
-  padding: .75rem 1rem;
-  border-width: 0;
-  border-radius: 0;
+.HeaderBrand {
+  color: #E0EDFF;
 }
 
-.form-control-dark {
-  color: #fff;
-  background-color: rgba(255, 255, 255, .1);
-  border-color: rgba(255, 255, 255, .1);
-}
-
-.form-control-dark:focus {
-  border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+.navbar-dark .navbar-brand {
+  color: slategrey;
 }
