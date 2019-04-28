@@ -2,55 +2,164 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import * as actions from '../../../actions';
 import AdminSidebar from '../AdminSidebar';
 import AdminHeader from '../AdminHeader';
 import styles from './LabAdd.module.css';
 
 class LabAdd extends Component {
-
   state = {
-    rows: []
-  }
-
-  onSubmit = (formProps) => {
-    console.log('Form Props: ', formProps)
+    certificate: '',
+    catALatest: '',
+    catBLatest: '',
+    catCLatest: '',
+    catDLatest: '',
+    catELatest: '',
+    notesLatest: '',
   };
 
-  handleAddRow(e) {
-    console.log('handleAddRow');
-    console.log(e.target)
-    e.preventDefault();
+  onSubmit = (formProps) => {
+    console.log({
+      formProps: formProps,
+      reportData: this.props.reportData,
+    })
+  };
+
+  updateCatALatest = (e) => {
+    this.setState({
+      catALatest: e.target.value
+    });
   }
+  updateCatBLatest = (e) => {
+    this.setState({
+      catBLatest: e.target.value
+    });
+  }
+  updateCatCLatest = (e) => {
+    this.setState({
+      catCLatest: e.target.value
+    });
+  }
+  updateCatDLatest = (e) => {
+    this.setState({
+      catDLatest: e.target.value
+    });
+  }
+  updateCatELatest = (e) => {
+    this.setState({
+      catELatest: e.target.value
+    });
+  }
+  updateNotesLatest = (e) => {
+    this.setState({
+      notesLatest: e.target.value
+    });
+  }
+
+  handleRemoveRow = (row) => {
+    const thisObj = { row };
+    const reportData = this.props.reportData.filter((r, i) => {
+      return i !== thisObj.row
+    }, thisObj);
+
+    this.props.updateAddLabReportData(reportData);
+  }
+
+  handleNewRow = (e) => {
+    e.preventDefault();
+    const newRow = {
+      a: this.state.catALatest,
+      b: this.state.catBLatest,
+      c: this.state.catCLatest,
+      d: this.state.catDLatest,
+      e: this.state.catELatest,
+      notes: this.state.notesLatest,
+    };
+
+    const reportData = this.props.reportData;
+    reportData.push(newRow);
+    this.props.updateAddLabReportData(reportData);
+
+    this.setState({
+      catALatest: '',
+      catBLatest: '',
+      catCLatest: '',
+      catDLatest: '',
+      catELatest: '',
+      notesLatest: ''
+    })
+  };
 
   renderReportData() {
     let reportRecord = [];
-    this.state.rows.forEach((row, i) => {
+    this.props.reportData.forEach((row, i) => {
       reportRecord.push(
-        <tr key={i}>
+        <tr key={i} >
           <td>{row.a}</td>
           <td>{row.b}</td>
           <td>{row.c}</td>
           <td>{row.d}</td>
-          <td>{row.e}</td>
+          <td>{row.ee}</td>
           <td>{row.notes}</td>
+          <td 
+            row={i}>
+            <FontAwesomeIcon 
+              onClick={(e) => this.handleRemoveRow(i)} 
+              icon={faTimesCircle} 
+            />
+          </td>
         </tr>
       );
     });
 
     reportRecord.push(
-      <tr
-        key={0}
-        style={{
-          backgroundColor: 'white'
-        }}
-      >
-        <td style={{ paddingLeft: '0' }}><input style={{ width: '100%'}} type="text"/></td>
-        <td><input style={{ width: '100%'}}  type="text"/></td>
-        <td><input style={{ width: '100%'}}  type="text"/></td>
-        <td><input style={{ width: '100%'}}  type="text"/></td>
-        <td><input style={{ width: '100%'}}  type="text"/></td>
-        <td style={{ paddingRight: '0' }}><input style={{ width: '100%'}}  type="text"/></td>
+      <tr key="latest" style={{backgroundColor: 'white' }}>
+        <td style={{ paddingLeft: '0', width: '30%' }}>
+          <input
+            style={{ width: '100%'}}
+            value={this.state.catALatest}
+            onChange={this.updateCatALatest}
+          />
+        </td>
+        <td className={styles.ReportDataNumeric}>
+          <input
+            style={{ width: '100%'}}
+            value={this.state.catBLatest}
+            onChange={this.updateCatBLatest}
+          />
+        </td>
+        <td className={styles.ReportDataNumeric}>
+          <input
+            style={{ width: '100%'}}
+            value={this.state.catCLatest}
+            onChange={this.updateCatCLatest}
+          />
+        </td>
+        <td className={styles.ReportDataNumeric}>
+          <input
+            style={{ width: '100%'}}
+            value={this.state.catDLatest}
+            onChange={this.updateCatDLatest}
+          />
+        </td>
+        <td className={styles.ReportDataNumeric}>
+          <input
+            style={{ width: '100%'}}
+            value={this.state.catELatest}
+            onChange={this.updateCatELatest}
+          />
+        </td>
+        <td style={{ paddingRight: '0' }}>
+          <textarea
+            rows="1"
+            style={{ width: '100%', border: '1px solid #CCCCCC'}}
+            value={this.state.notesLatest}
+            onChange={this.updateNotesLatest}
+          >
+          </textarea>
+        </td>
       </tr>
     );
 
@@ -69,30 +178,30 @@ class LabAdd extends Component {
                 <span className={styles.LabInfoText}>
                   <Field
                     name="name"
-                    className="form-control"
+                    type="text"
                     component="input"
-                    autoComplete="none"
+                    className="form-control"
                   />
                 </span>
               </h5>
               <h5 className={styles.BottomPush}>Address1: <br/>
                 <span className={styles.LabInfoText}>
-                  <Field
+                   <Field
                     name="address1"
-                    className="form-control"
+                    type="text"
                     component="input"
-                    autoComplete="none"
+                    className="form-control"
                   />
                 </span>
               </h5>
               <h5>Address2: <br/>
                 <span className={styles.LabInfoText}>
-                  <Field
-                    name="address2"
-                    className="form-control"
-                    component="input"
-                    autoComplete="none"
-                  />
+                <Field
+                  name="address2"
+                  type="text"
+                  component="input"
+                  className="form-control"
+                />
                 </span>
               </h5>
             </div>
@@ -101,22 +210,22 @@ class LabAdd extends Component {
             <div className={styles.ColumnTwo}>
               <h5 className={styles.BottomPush}>City: <br/>
                 <span className={styles.LabInfoText}>
-                  <Field
+                <Field
                     name="city"
-                    className="form-control"
+                    type="text"
                     component="input"
-                    autoComplete="none"
+                    className="form-control"
                   />
                 </span>
               </h5>
               <h5>Certificate Number: <br/>
                 <span className={styles.LabInfoText}>
-                  <Field
-                    name="certificateNum"
-                    className="form-control"
-                    component="input"
-                    autoComplete="none"
-                  />
+                <Field
+                  name="certificate"
+                  type="text"
+                  component="input"
+                  className="form-control"
+                />
                 </span>
               </h5>
             </div>
@@ -145,6 +254,7 @@ class LabAdd extends Component {
                 <th>D</th>
                 <th>E</th>
                 <th>Notes</th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
@@ -155,13 +265,14 @@ class LabAdd extends Component {
             <div className="btn-toolbar mb-2 mb-md-0">
               <div className="btn-group mr-2">
                 <button
-                  onClick={this.handleAddRow}
+                  style={{ boxShadow: 'none'}}
+                  onClick={this.handleNewRow}
                   className="btn btn-sm btn-outline-secondary">Add Row
                 </button>
               </div>
             </div>
             <div style={{ width: '300px', marginTop: '35px' }}>
-              <button type="submit" className="btn btn-block btn-success">Add Lab</button>
+              <button type="submit" style={{ boxShadow: 'none' }} className="btn btn-block btn-success">Add Lab</button>
             </div>
         </form>
       </div>
@@ -188,6 +299,17 @@ class LabAdd extends Component {
   }
 }
 
-export default compose(connect(null, actions), reduxForm({ form: 'addLab' }))(
+// const mapStateToProps = state => ({
+//   reportData: state.labReport.data
+// });
+
+function mapStateToProps(state) {
+  // console.log(state.labReport.data)
+  return {
+    reportData: state.labReport.data
+  }
+}
+
+export default compose(connect(mapStateToProps, actions), reduxForm({ form: 'addLab' }))(
   LabAdd
 );
