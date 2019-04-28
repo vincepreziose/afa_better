@@ -9,10 +9,6 @@ import styles from './LabAdd.module.css';
 
 class LabAdd extends Component {
   state = {
-    name: '',
-    address1: '',
-    address2: '',
-    city: '',
     certificate: '',
     catALatest: '',
     catBLatest: '',
@@ -23,35 +19,11 @@ class LabAdd extends Component {
   };
 
   onSubmit = (formProps) => {
-    console.log('formProps: ', formProps)
+    console.log({
+      formProps: formProps,
+      reportData: this.props.reportData,
+    })
   };
-
-  updateName = (e) => {
-    this.setState({
-      name: e.target.value
-    });
-  }
-
-  updateAddress1 = (e) => {
-    this.setState({
-      address1: e.target.value
-    });
-  }
-  updateAddress2 = (e) => {
-    this.setState({
-      address2: e.target.value
-    });
-  }
-  updateCity = (e) => {
-    this.setState({
-      city: e.target.value
-    });
-  }
-  updateCertificate = (e) => {
-    this.setState({
-      certificate: e.target.value
-    });
-  }
 
   updateCatALatest = (e) => {
     this.setState({
@@ -192,8 +164,6 @@ class LabAdd extends Component {
                     type="text"
                     component="input"
                     className="form-control"
-                    value={this.state.name}
-                    onChange={this.updateName}
                   />
                 </span>
               </h5>
@@ -204,8 +174,6 @@ class LabAdd extends Component {
                     type="text"
                     component="input"
                     className="form-control"
-                    value={this.state.address1}
-                    onChange={this.updateAddress1}
                   />
                 </span>
               </h5>
@@ -216,8 +184,6 @@ class LabAdd extends Component {
                   type="text"
                   component="input"
                   className="form-control"
-                  value={this.state.address2}
-                  onChange={this.updateAddress2}
                 />
                 </span>
               </h5>
@@ -232,8 +198,6 @@ class LabAdd extends Component {
                     type="text"
                     component="input"
                     className="form-control"
-                    value={this.state.city}
-                    onChange={this.updateCity}
                   />
                 </span>
               </h5>
@@ -244,8 +208,6 @@ class LabAdd extends Component {
                   type="text"
                   component="input"
                   className="form-control"
-                  value={this.state.certificate}
-                  onChange={this.updateCertificate}
                 />
                 </span>
               </h5>
